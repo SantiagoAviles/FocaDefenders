@@ -42,7 +42,7 @@ public class Toolbar extends Bar {
 	private void initButtons() {
 
 		bMenu = new MyButton("Menu", 2, 642, 100, 30);
-		bSave = new MyButton("Save", 2, 674, 100, 30);
+		bSave = new MyButton("Guardar", 2, 674, 100, 30);
 
 		int w = 50;
 		int h = 50;

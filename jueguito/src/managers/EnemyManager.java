@@ -6,11 +6,18 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import enemies.Bat;
+import enemies.Crab;
 import enemies.Enemy;
-import enemies.Knight;
-import enemies.Orc;
-import enemies.Wolf;
+import enemies.Fish;
+import enemies.Octopus;
+import enemies.Penguin;
+import enemies.PolarBear;
+import enemies.RebelSeal;
+import enemies.Seagull;
+import enemies.Sealion;
+import enemies.Turtle;
+import enemies.Whale;
+
 import helpz.LoadSave;
 import helpz.Utilz;
 import objects.PathPoint;
@@ -25,13 +32,13 @@ public class EnemyManager {
 	private BufferedImage[] enemyImgs;
 	private ArrayList<Enemy> enemies = new ArrayList<>();
 	private PathPoint start, end;
-	private int HPbarWidth = 20;
+	private int HPbarWidth = 50;
 	private BufferedImage slowEffect;
 	private int[][] roadDirArr;
 
 	public EnemyManager(Playing playing, PathPoint start, PathPoint end) {
 		this.playing = playing;
-		enemyImgs = new BufferedImage[4];
+		enemyImgs = new BufferedImage[10];
 		this.start = start;
 		this.end = end;
 
@@ -65,7 +72,7 @@ public class EnemyManager {
 
 	private void loadEnemyImgs() {
 		BufferedImage atlas = LoadSave.getSpriteAtlas();
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 10; i++)
 			enemyImgs[i] = atlas.getSubimage(i * 32, 32, 32, 32);
 
 	}
@@ -225,20 +232,37 @@ public class EnemyManager {
 		int y = start.getyCord() * 32;
 
 		switch (enemyType) {
-		case ORC:
-			enemies.add(new Orc(x, y, 0, this));
-			break;
-		case BAT:
-			enemies.add(new Bat(x, y, 0, this));
-			break;
-		case KNIGHT:
-			enemies.add(new Knight(x, y, 0, this));
-			break;
-		case WOLF:
-			enemies.add(new Wolf(x, y, 0, this));
-			break;
+			case FISH:
+				enemies.add(new Fish(x, y, 0, this));
+				break;
+			case SEAGULL:
+				enemies.add(new Seagull(x, y, 0, this));
+				break;
+			case PENGUIN:
+				enemies.add(new Penguin(x, y, 0, this));
+				break;
+			case CRAB:
+				enemies.add(new Crab(x, y, 0, this));
+				break;
+			case SEALION:
+				enemies.add(new Sealion(x, y, 0, this));
+				break;
+			case OCTOPUS:
+				enemies.add(new Octopus(x, y, 0, this));
+				break;
+			case REBELSEAL:
+				enemies.add(new RebelSeal(x, y, 0, this));
+				break;
+			case TURTLE:
+				enemies.add(new Turtle(x, y, 0, this));
+				break;
+			case WHALE:
+				enemies.add(new Whale(x, y, 0, this));
+				break;
+			case POLARBEAR:
+				enemies.add(new PolarBear(x, y, 0, this));
+				break;
 		}
-
 	}
 
 	public void draw(Graphics g) {
@@ -258,9 +282,24 @@ public class EnemyManager {
 	}
 
 	private void drawHealthBar(Enemy e, Graphics g) {
-		g.setColor(Color.red);
-		g.fillRect((int) e.getX() + 16 - (getNewBarWidth(e) / 2), (int) e.getY() - 10, getNewBarWidth(e), 3);
+		int barX = (int) e.getX();
+		int barY = (int) e.getY() - 10;
 
+		int totalBarWidth = HPbarWidth;
+		int currentBarWidth = (int) (HPbarWidth * e.getHealthBarFloat());
+
+		int drawX = barX + 16 - (totalBarWidth / 2); // Centrado respecto al sprite de 32px
+
+		// Barra de fondo (rojo = vida total)
+		g.setColor(Color.red);
+		g.fillRect(drawX, barY, totalBarWidth, 4);
+
+		// Barra verde encima (vida restante)
+		g.setColor(Color.green);
+		g.fillRect(drawX, barY, currentBarWidth, 4);
+
+		g.setColor(Color.black);
+		g.drawRect(drawX - 1, barY - 1, totalBarWidth + 1, 5);
 	}
 
 	private int getNewBarWidth(Enemy e) {

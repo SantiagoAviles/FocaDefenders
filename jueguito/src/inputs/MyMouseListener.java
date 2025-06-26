@@ -133,13 +133,13 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// We wont use this
+		// TODO
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// We wont use this
+		// TODO
 	}
 
 }

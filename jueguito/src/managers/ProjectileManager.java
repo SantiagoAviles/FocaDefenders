@@ -35,10 +35,10 @@ public class ProjectileManager {
 
 	private void importImgs() {
 		BufferedImage atlas = LoadSave.getSpriteAtlas();
-		proj_imgs = new BufferedImage[3];
+		proj_imgs = new BufferedImage[8];
 
-		for (int i = 0; i < 3; i++)
-			proj_imgs[i] = atlas.getSubimage((7 + i) * 32, 32, 32, 32);
+		for (int i = 0; i < 8; i++)
+			proj_imgs[i] = atlas.getSubimage((10 + i) * 32, 0, 32, 32);
 		importExplosion(atlas);
 	}
 
@@ -69,7 +69,7 @@ public class ProjectileManager {
 
 		float rotate = 0;
 
-		if (type == ARROW) {
+		if (type == ARROW || type == ICESPIKE || type == POISONDART || type == XBOWARROW || type == SNIPERBULLET) {
 			float arcValue = (float) Math.atan(yDist / (float) xDist);
 			rotate = (float) Math.toDegrees(arcValue);
 
@@ -132,7 +132,7 @@ public class ProjectileManager {
 			if (e.isAlive())
 				if (e.getBounds().contains(p.getPos())) {
 					e.hurt(p.getDmg());
-					if (p.getProjectileType() == CHAINS)
+					if (p.getProjectileType() == ATOM || p.getProjectileType() == ICESPIKE) //XD
 						e.slow();
 
 					return true;
@@ -155,7 +155,7 @@ public class ProjectileManager {
 
 		for (Projectile p : projectiles)
 			if (p.isActive()) {
-				if (p.getProjectileType() == ARROW) {
+				if (p.getProjectileType() == ARROW || p.getProjectileType() == ICESPIKE || p.getProjectileType() == POISONDART || p.getProjectileType() == XBOWARROW || p.getProjectileType() == SNIPERBULLET) {
 					g2d.translate(p.getPos().x, p.getPos().y);
 					g2d.rotate(Math.toRadians(p.getRotation()));
 					g2d.drawImage(proj_imgs[p.getProjectileType()], -16, -16, null);
@@ -178,12 +178,22 @@ public class ProjectileManager {
 
 	private int getProjType(Tower t) {
 		switch (t.getTowerType()) {
-		case ARCHER:
-			return ARROW;
-		case CANNON:
-			return BOMB;
-		case WIZARD:
-			return CHAINS;
+			case ARCHER:
+				return ARROW;
+			case CANNON:
+				return BOMB;
+			case WIZARD:
+				return ATOM;
+			case FREEZER:
+				return ICESPIKE;
+			case POISONER:
+				return POISONDART;
+			case SNIPER:
+				return SNIPERBULLET;
+			case XBOW:
+				return XBOWARROW;
+			case THROWER:
+				return SNOWBALL;
 		}
 		return 0;
 	}

@@ -27,25 +27,61 @@ public class Tower {
 		this.tier++;
 
 		switch (towerType) {
-		case ARCHER:
-			dmg += 2;
-			range += 20;
-			cooldown -= 5;
-			break;
-		case CANNON:
-			dmg += 5;
-			range += 20;
-			cooldown -= 15;
-			break;
-		case WIZARD:
-			range += 20;
-			cooldown -= 10;
-			break;
+			case ARCHER:
+				dmg += 3;
+				range += 20;
+				cooldown -= 5;
+				break;
+			case CANNON:
+				dmg += 10;
+				range += 20;
+				cooldown -= 20;
+				break;
+			case WIZARD:
+				dmg += 6;
+				range += 20;
+				cooldown -= 10;
+				break;
+			case FREEZER:
+				dmg += 0;
+				range += 25;
+				cooldown -= 15;
+				break;
+			case POISONER:
+				dmg += 0;
+				range += 20;
+				cooldown -= 10;
+				break;
+			case SNIPER:
+				dmg += 50;
+				range += 0;
+				cooldown -= 30;
+				break;
+			case XBOW:
+				dmg += 0;
+				range += 0;
+				cooldown -= 5;
+				break;
+			case INVESTOR:
+				dmg += 0;
+				range += 0;
+				cooldown -= 0;
+				break;
+			case CHEER:
+				dmg += 0;
+				range += 40;
+				cooldown -= 0;
+				break;
+			case THROWER:
+				dmg += 1;
+				range += 10;
+				cooldown -= 3;
+				break;
 		}
+
 	}
 
 	public boolean isCooldownOver() {
-
 		return cdTick >= cooldown;
 	}
 

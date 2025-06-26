@@ -1,8 +1,6 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class MyButton {
 
@@ -71,10 +69,10 @@ public class MyButton {
 	}
 
 	private void drawText(Graphics g) {
+		g.setFont(new Font("Arial", Font.BOLD, 16)); // Ajusta a un tamaño legible y compacto
 		int w = g.getFontMetrics().stringWidth(text);
 		int h = g.getFontMetrics().getHeight();
 		g.drawString(text, x - w / 2 + width / 2, y + h / 2 + height / 2);
-
 	}
 
 	public void resetBooleans() {

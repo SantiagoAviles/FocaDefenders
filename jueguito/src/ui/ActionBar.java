@@ -23,11 +23,11 @@ public class ActionBar extends Bar {
 
 	private DecimalFormat formatter;
 
-	private int gold = 500;
+	private int gold = 100;
 	private boolean showTowerCost;
 	private int towerCostType;
 
-	private int lives = 25;
+	private int lives = 1;
 
 	public ActionBar(int x, int y, int width, int height, Playing playing) {
 		super(x, y, width, height);
@@ -38,7 +38,7 @@ public class ActionBar extends Bar {
 	}
 
 	public void resetEverything() {
-		lives = 25;
+		lives = 1;
 		towerCostType = 0;
 		showTowerCost = false;
 		gold = 100;
@@ -48,14 +48,14 @@ public class ActionBar extends Bar {
 
 	private void initButtons() {
 
-		bMenu = new MyButton("Menu", 2, 642, 100, 30);
-		bPause = new MyButton("Pausar", 2, 682, 100, 30);
+		bMenu = new MyButton("Menu", 2, 642, 60, 30);
+		bPause = new MyButton("Pausar", 2, 682, 60, 30);
 
-		towerButtons = new MyButton[3];
+		towerButtons = new MyButton[10];
 
 		int w = 50;
 		int h = 50;
-		int xStart = 110;
+		int xStart = 65;
 		int yStart = 650;
 		int xOffset = (int) (w * 1.1f);
 
@@ -89,7 +89,7 @@ public class ActionBar extends Bar {
 	public void draw(Graphics g) {
 
 		// Background
-		g.setColor(new Color(220, 123, 15));
+		g.setColor(new Color(140, 82, 20, 255));
 		g.fillRect(x, y, width, height);
 
 		// Buttons
@@ -167,7 +167,7 @@ public class ActionBar extends Bar {
 	private void drawWavesLeftInfo(Graphics g) {
 		int current = playing.getWaveManager().getWaveIndex();
 		int size = playing.getWaveManager().getWaves().size();
-		g.drawString("Wave " + (current + 1) + " / " + size, 425, 770);
+		g.drawString("Oleada " + (current + 1) + " / " + size, 425, 770);
 
 	}
 
